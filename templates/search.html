@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Scrapper</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  
+</head>
+<body>
+    <main class="container">
+        <table>
+        <!-- 결과가 없을 경우를 위한 분기 -->
+        {% if count > 0 %}
+          <td>
+            <h1>Found <mark>{{count}}</mark> Results for "{{keyword}}"</h1>
+          </td>
+          <td>
+            <a role="button" style="height:50px; float:right; text-align:center;" class="secondary" target="_blank" href="/export?keyword={{keyword}}"><h6>Export to file</h6></a>
+          </td>    
+        {% else %}
+          <td>
+            <h1>Couldn't find any result for "{{keyword}}" 🥲</h1>
+          </td>
+        {% endif %}         
+        </table>
+        <table role="grid">
+            <thead>
+                <tr style="background-color:deepskyblue">
+                    <th style="color: white;">Position</th>
+                    <th style="color: white;">Company</th>
+                    <th style="color: white;">Location/Salary</th>
+                    <th style="color: white;">Link</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for job in jobs %}
+                <tr>
+                    <td>{{job.position}}</td>
+                    <td>{{job.company}}</td>
+                    <td>{{job.location}}</td>
+                    <td><a href="{{job.link}}" target="_blank">Apply</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </main>  
+</body>
+</html>
